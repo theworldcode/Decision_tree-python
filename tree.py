@@ -17,11 +17,37 @@ def read_dataset(filename):
     有自己的房子：0代表否，1代表是；
     信贷情况：0代表一般，1代表好，2代表非常好；
     类别(是否给贷款)：0代表否，1代表是
+
+    ；单选，、多选
+    USER_DATA：八位字节序列：“值”；默认值为空序列
+    TOPIC_DATA：八位字节序列：“值”；默认值为空序列
+    GROUP_DATA：八位字节序列：“值”；默认值为空序列
+    DURABILITY（持久性）：0代表易失的；1代表本地临时保存；2代表临时保存；3代表永久保存
+    DURABILITY_SERVICE（持久性服务）：服务清理延迟-数值型默认值为0；历史种类，历史深度；最大样本，最大实例数，最大样本数，每个实例
+    PRESENTATION（演示）：0代表实例，1代表话题，2代表团体，还有两个布尔值：“相干_使用权”，“订购_使用权”
+    DEADLINE（最后期限）：持续时间'时期'
+    LATENCY_BUDGET：持续时间'持续时间'
+    OWNERSHIP（所有权）：0代表共享；1代表独家的
+    OWNERSHIP_STRENGTH（所有权长度）：一个整数值
+    LIVELINESS（活力）：0代表自动的；1代表手动模式；2代表参与者手动；3代表话题手动
+    TIME_BASED_FILTER（基于时间的过滤）：持续时间“最低限度_分离”
+    PARTITION（划分）：字符串列表“名称”
+    RELIABILITY（可靠性）：0代表可靠的；1代表尽力而为；2代表设置最大阻塞时间
+    TRANSPORT_PRIORITY（传输优先级）：一个整数值
+    LIFESPAN（寿命）：持续时间“期间”
+    DESTINATION_ORDER（目的地命令）：0代表接收时间戳；1代表源时间戳
+    HISTORY（历史）：0代表保留全部；1代表保留最后几个，一个可选的整数“深度”
+    RESOURCE_LIMITS（资源限制）：最大样本，最大实例数，任何实例的最大样本数
+    ENTITY_FACTORY（实体工厂）：自动启用创建实体（布尔值）
+    WRITER_DATA_LIFECYCLE（写数据生命周期）：自动处理未注册实例（布尔值）
+    READER_DATA_LIFECYCLE（读数据生命周期）：自动清除无写样本延迟，自动清除处置样本延迟
+    RESULT(结果，对应每条数据具体分类结果)
     """
     fr = open(filename, 'r')
     all_lines = fr.readlines()  # list形式,每行为1个str
     # print all_lines
-    labels = ['年龄段', '有工作', '有自己的房子', '信贷情况']
+    labels = ['用户数据', '话题数据', '分组数据', '持久性', '持久性服务', '演示', '最后期限', '持续时间', '所有权', '所有权长度', '活力', '基于时间的过滤', '划分',
+              '可靠性', '传输优先级', '寿命', '目的地命令', '历史', '资源限制', '实体工厂', '写数据生命周期', '读数据生命周期']
     # featname=all_lines[0].strip().split(',')  #list形式
     # featname=featname[:-1]
     labelCounts = {}
@@ -224,7 +250,10 @@ def ID3_createTree(dataset, labels, test_dataset):
 
     if post_pruning:
         tree_output = classifytest(ID3Tree,
-                                   featLabels=['年龄段', '有工作', '有自己的房子', '信贷情况'],
+                                   featLabels=['用户数据', '话题数据', '分组数据', '持久性', '持久性服务', '演示', '最后期限', '持续时间', '所有权',
+                                               '所有权长度', '活力', '基于时间的过滤', '划分',
+                                               '可靠性', '传输优先级', '寿命', '目的地命令', '历史', '资源限制', '实体工厂', '写数据生命周期',
+                                               '读数据生命周期'],
                                    testDataSet=test_dataset)
         ans = []
         for vec in test_dataset:
@@ -294,7 +323,10 @@ def C45_createTree(dataset, labels, test_dataset):
 
     if post_pruning:
         tree_output = classifytest(C45Tree,
-                                   featLabels=['年龄段', '有工作', '有自己的房子', '信贷情况'],
+                                   featLabels=['用户数据', '话题数据', '分组数据', '持久性', '持久性服务', '演示', '最后期限', '持续时间', '所有权',
+                                               '所有权长度', '活力', '基于时间的过滤', '划分',
+                                               '可靠性', '传输优先级', '寿命', '目的地命令', '历史', '资源限制', '实体工厂', '写数据生命周期',
+                                               '读数据生命周期'],
                                    testDataSet=test_dataset)
         ans = []
         for vec in test_dataset:
@@ -365,7 +397,10 @@ def CART_createTree(dataset, labels, test_dataset):
 
         if post_pruning:
             tree_output = classifytest(CARTTree,
-                                       featLabels=['年龄段', '有工作', '有自己的房子', '信贷情况'],
+                                       featLabels=['用户数据', '话题数据', '分组数据', '持久性', '持久性服务', '演示', '最后期限', '持续时间', '所有权',
+                                                   '所有权长度', '活力', '基于时间的过滤', '划分',
+                                                   '可靠性', '传输优先级', '寿命', '目的地命令', '历史', '资源限制', '实体工厂', '写数据生命周期',
+                                                   '读数据生命周期'],
                                        testDataSet=test_dataset)
             ans = []
             for vec in test_dataset:
@@ -452,7 +487,7 @@ if __name__ == '__main__':
     print(u"下面开始创建相应的决策树-------")
 
     while True:
-        dec_tree = '1'
+        dec_tree = '3'
         # ID3决策树
         if dec_tree == '1':
             labels_tmp = labels[:]  # 拷贝，createTree会改变labels
