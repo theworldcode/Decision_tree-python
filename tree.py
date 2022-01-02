@@ -488,7 +488,7 @@ if __name__ == '__main__':
     print(u"下面开始创建相应的决策树-------")
 
     while True:
-        dec_tree = '3'
+        dec_tree = '2'
         # ID3决策树
         if dec_tree == '1':
             labels_tmp = labels[:]  # 拷贝，createTree会改变labels
