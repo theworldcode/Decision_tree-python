@@ -1,7 +1,7 @@
 #coding:utf-8
 import matplotlib.pyplot as plt
 from pylab import mpl
-mpl.rcParams['font.sans-serif'] = ['SimHei']
+mpl.rcParams['font.sans-serif'] = ['Heiti TC']
 decisionNode = dict(boxstyle="sawtooth", fc="0.8")
 leafNode = dict(boxstyle="round4", fc="0.8")
 arrow_args = dict(arrowstyle="<-")
